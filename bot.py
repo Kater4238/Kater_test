@@ -1,11 +1,15 @@
 import discord
 from discord.ext import commands
+import json
+
+with open('setting.json','r') as j_file:
+    j_data = json.load(j_file)
 
 bot = commands.Bot(command_prefix='!')
 
 @bot.event
 async def on_ready():
-    print(">> Bot is online <<")
+    print('>> Bot is online <<')
 
 @bot.event
 async def on_member_join(member):
@@ -19,6 +23,6 @@ async def on_member_remove(member):
 
 @bot.command()
 async def ping(ctx):
-    await ctx.send(f"{round(bot.latency*1000)} ms")
+    await ctx.send(f'{round(bot.latency*1000)} ms')
 
-bot.run("NzMxNDQ4Njk0OTUxNjQxMjIw.XwmpTA.CpC0rg3EkFipjeNAsPjXPLdfo1Y")
+bot.run(j_data['TOKEN'])
